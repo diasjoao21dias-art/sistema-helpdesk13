@@ -13,8 +13,11 @@
   </div>
   {% if chamados %}
   <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="mb-0"><i class="bi bi-list-ul me-2"></i>Lista de Chamados</h5>
+      <a href="?sort={{ next_sort }}" class="btn btn-outline-secondary btn-sm" title="Alternar ordenação">
+        <i class="{{ sort_icon }} me-1"></i>{{ sort_label }}
+      </a>
     </div>
     <div class="card-body p-0">
       <div class="table-responsive">
@@ -76,6 +79,13 @@
       
       <!-- Mobile Card View -->
       <div class="d-md-none">
+        <!-- Mobile Sort Button -->
+        <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+          <small class="text-muted">{{ chamados|length }} chamado(s)</small>
+          <a href="?sort={{ next_sort }}" class="btn btn-outline-secondary btn-sm">
+            <i class="{{ sort_icon }} me-1"></i>{{ sort_label }}
+          </a>
+        </div>
         {% for c in chamados %}
         <div class="ticket-card">
           <div class="ticket-header">

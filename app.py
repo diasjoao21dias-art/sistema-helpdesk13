@@ -654,6 +654,21 @@ def index():
         session.clear()
         return redirect(url_for("login"))
     
+    # Get sort parameter from URL (default: asc for ascending order)
+    sort_order = request.args.get('sort', 'asc')
+    
+    # Determine sort order (asc = crescente/oldest first, desc = decrescente/newest first)
+    if sort_order == 'desc':
+        order_by_clause = Chamado.criado_em.desc()
+        next_sort = 'asc'
+        sort_label = 'Recentes Primeiro'
+        sort_icon = 'bi bi-arrow-down'
+    else:
+        order_by_clause = Chamado.criado_em.asc()
+        next_sort = 'desc'
+        sort_label = 'Antigos Primeiro'
+        sort_icon = 'bi bi-arrow-up'
+    
     # Optimize database queries with eager loading to prevent N+1 problems
     base_query = Chamado.query.options(
         joinedload(Chamado.usuario),
@@ -662,21 +677,29 @@ def index():
     
     if u.is_admin():
         # Admin sees all tickets
-        chamados = base_query.order_by(Chamado.criado_em.desc()).all()
+        chamados = base_query.order_by(order_by_clause).all()
     elif u.has_permission('view_all'):
         # Users with view_all permission (like semigerente) see all tickets
-        chamados = base_query.order_by(Chamado.criado_em.desc()).all()
+        chamados = base_query.order_by(order_by_clause).all()
     elif u.is_operator_like():
         # Operators and operator-like roles see tickets from their assigned sectors only
         user_sector_names = u.get_sector_names()
         if user_sector_names:
-            chamados = base_query.filter(Chamado.setor.in_(user_sector_names)).order_by(Chamado.criado_em.desc()).all()
+            chamados = base_query.filter(Chamado.setor.in_(user_sector_names)).order_by(order_by_clause).all()
         else:
             chamados = []  # No sectors assigned, no tickets visible
     else:
         # Regular users see only their own tickets
-        chamados = base_query.filter_by(usuario_id=u.id).order_by(Chamado.criado_em.desc()).all()
-    return render_template("index.html", app_name=APP_NAME, user=u, chamados=chamados)
+        chamados = base_query.filter_by(usuario_id=u.id).order_by(order_by_clause).all()
+    
+    return render_template("index.html", 
+                         app_name=APP_NAME, 
+                         user=u, 
+                         chamados=chamados,
+                         sort_order=sort_order,
+                         next_sort=next_sort,
+                         sort_label=sort_label,
+                         sort_icon=sort_icon)
 
 # -------------------- USUÁRIOS (ADMIN) --------------------
 @app.route("/usuarios")
