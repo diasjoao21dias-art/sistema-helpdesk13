@@ -30,3 +30,5 @@
 2025-09-22 11:01:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de relatórios - 888 arquivos removidos - Usuário: admin
 2025-09-22 11:01:49 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
 2025-09-22 12:28:43 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 12:33:05 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 12:33:47 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
