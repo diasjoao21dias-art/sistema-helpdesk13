@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Usuários</h3>
+    <a class="btn btn-primary" href="{{ url_for('usuarios_novo') }}">Novo Usuário</a>
+  </div>
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead><tr><th>#</th><th>Usuário</th><th>Perfil</th><th>Ações</th></tr></thead>
+          <tbody>
+            {% for u in users %}
+              <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.username }}</td>
+                <td><span class="badge {% if u.role=='admin' %}bg-danger{% elif u.role=='operador' %}bg-primary{% else %}bg-secondary{% endif %}">{{ u.role }}</span></td>
+                <td class="text-nowrap">
+                  <a class="btn btn-sm btn-outline-primary" href="{{ url_for('usuarios_editar', user_id=u.id) }}">Editar</a>
+                  <a class="btn btn-sm btn-outline-danger" href="{{ url_for('usuarios_excluir', user_id=u.id) }}" onclick="return confirm('Excluir usuário {{ u.username }}?')">Excluir</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

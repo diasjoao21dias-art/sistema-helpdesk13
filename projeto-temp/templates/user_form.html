@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ 'Editar Usuário' if uedit else 'Novo Usuário' }}</h3>
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Usuário</label>
+    <input type="text" name="username" class="form-control" value="{{ uedit.username if uedit else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Senha {{ '(deixe em branco para não alterar)' if uedit else '' }}</label>
+    <input type="password" name="password" class="form-control" {{ '' if uedit else 'required' }}>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Papel</label>
+    <select name="role" class="form-select" required>
+      {% set r = uedit.role if uedit else '' %}
+      <option value="usuario" {{ 'selected' if r == 'usuario' else '' }}>Usuário</option>
+      <option value="operador" {{ 'selected' if r == 'operador' else '' }}>Operador</option>
+      <option value="admin" {{ 'selected' if r == 'admin' else '' }}>Admin</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Salvar</button>
+  <a class="btn btn-secondary" href="{{ url_for('usuarios_list') }}">Cancelar</a>
+</form>
+{% endblock %}

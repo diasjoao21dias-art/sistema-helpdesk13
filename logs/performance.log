@@ -1,0 +1,3 @@
+2025-09-22 11:53:59,815 - PERF - Metric: route_chamados_novo | Value: 37.151ms
+2025-09-22 11:54:19,326 - PERF - Metric: route_chamados_novo | Value: 20.549999999999997ms
+2025-09-22 12:25:53,788 - PERF - Metric: route_chamados_novo | Value: 102.74ms

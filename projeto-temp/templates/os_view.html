@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>OS #{{ o.id }}</h3>
+<div class="card shadow-sm mb-3">
+  <div class="card-body">
+    <h5>{{ o.titulo }}</h5>
+    <p class="mb-1"><strong>Status:</strong> {{ o.status }}</p>
+    <p class="mb-1"><strong>Abertura:</strong> {{ o.data_abertura.strftime("%d/%m/%Y %H:%M") if o.data_abertura }}</p>
+    <p class="mb-1"><strong>Fechamento:</strong> {{ o.data_fechamento.strftime("%d/%m/%Y %H:%M") if o.data_fechamento else '-' }}</p>
+    <p class="mb-1"><strong>Descrição:</strong><br>{{ o.descricao }}</p>
+    {% if o.solucao %}
+      <hr>
+      <p class="mb-1"><strong>Resolução:</strong><br>{{ o.solucao }}</p>
+    {% endif %}
+  </div>
+</div>
+<a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Voltar</a>
+{% endblock %}

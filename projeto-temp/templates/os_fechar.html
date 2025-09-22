@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Fechar OS #{{ o.id }}</h3>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Descreva o que foi feito</label>
+        <textarea class="form-control" name="solucao" rows="5" required></textarea>
+      </div>
+      <button class="btn btn-success">Fechar OS</button>
+      <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

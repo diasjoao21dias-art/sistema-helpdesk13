@@ -22,3 +22,11 @@
 2025-09-22 10:56:29 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
 2025-09-22 10:56:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
 2025-09-22 10:58:35 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:00:29 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:00:30 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:01:05 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:01:20 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 11:01:23 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:01:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de relatórios - 888 arquivos removidos - Usuário: admin
+2025-09-22 11:01:49 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-22 12:28:43 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin

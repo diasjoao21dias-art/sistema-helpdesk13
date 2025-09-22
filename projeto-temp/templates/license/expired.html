@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licença Expirada - {{ app_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .expired-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .expired-header {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .expired-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .btn-renew {
+            background: linear-gradient(45deg, #00d2d3, #54a0ff);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .btn-renew:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 210, 211, 0.3);
+        }
+        .contact-info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-loss {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <div class="expired-card">
+                    <div class="expired-header">
+                        <div class="expired-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h1 class="mb-3">Licença Expirada</h1>
+                        <h4>{{ app_name }}</h4>
+                        {% if license_status and license_status.customer_name %}
+                        <p class="mb-0">Cliente: {{ license_status.customer_name }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <h3 class="text-danger">Acesso Suspenso</h3>
+                            <p class="lead">Sua licença do {{ app_name }} expirou e o sistema foi bloqueado.</p>
+                            
+                            {% if license_status %}
+                            <div class="alert alert-warning">
+                                <strong>Expirou em:</strong> {{ license_status.expires_at if license_status.expires_at else 'Data não disponível' }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="feature-loss">
+                            <h5><i class="bi bi-x-circle text-danger"></i> Funcionalidades Bloqueadas</h5>
+                            <ul class="mb-0">
+                                <li>Criação e edição de chamados</li>
+                                <li>Acesso ao painel administrativo</li>
+                                <li>Geração de relatórios</li>
+                                <li>Gestão de usuários e setores</li>
+                                <li>Backup e sincronização</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center my-4">
+                            <h4 class="text-primary">Renove Agora e Continue Usando</h4>
+                            <p>Renove sua licença para restaurar o acesso completo ao sistema.</p>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <a href="/license/activate" class="btn btn-renew text-white">
+                                    <i class="bi bi-arrow-clockwise"></i> Renovar Licença
+                                </a>
+                                <a href="https://olivion.com.br/renovar" target="_blank" class="btn btn-outline-primary">
+                                    <i class="bi bi-credit-card"></i> Pagar Online
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info">
+                            <h5><i class="bi bi-headset text-primary"></i> Precisa de Ajuda?</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Suporte Técnico:</strong></p>
+                                    <p>
+                                        <i class="bi bi-envelope"></i> suporte@olivion.com.br<br>
+                                        <i class="bi bi-whatsapp"></i> (11) 99999-9999
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Vendas:</strong></p>
+                                    <p>
+                                        <i class="bi bi-envelope"></i> vendas@olivion.com.br<br>
+                                        <i class="bi bi-telephone"></i> (11) 3333-3333
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <small class="text-muted">
+                                <i class="bi bi-shield-lock"></i>
+                                Seus dados estão seguros e serão preservados após a renovação.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

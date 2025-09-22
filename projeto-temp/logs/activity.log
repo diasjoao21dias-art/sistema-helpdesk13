@@ -1,0 +1,50 @@
+2025-09-22 11:40:25 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:43:23 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:44:41 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 11:44:47 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário luciene fez login - Usuário: luciene
+2025-09-22 08:49:31 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-22 08:49:34 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 08:50:14 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 12:51:57 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para medcenter - Usuário: Sistema
+2025-09-22 12:52:06 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 13:00:12 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:04:31 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-22 10:04:35 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:04:49 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:05:50 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-22 10:10:27 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-22 13:22:24 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para medcenter - Usuário: Sistema
+2025-09-22 13:22:31 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 13:51:17 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 13:51:26 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:56:09 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-22 10:56:12 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:56:29 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-22 10:56:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-22 10:58:35 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 14:19:36 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para medcenter - Usuário: Sistema
+2025-09-22 14:19:43 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 14:36:19 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 14:45:00 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 11:53:44 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-22 11:53:48 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:02:11 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para medcenter - Usuário: Sistema
+2025-09-22 15:02:24 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:08:13 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:12:48 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:14:42 - INFO - ActivityLogger - Atividade registrada: ADMIN - Papel 'compras operador' criado - Usuário: admin
+2025-09-22 15:15:14 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 15:15:18 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário luciene fez login - Usuário: luciene
+2025-09-22 15:15:28 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário luciene fez logout - Usuário: luciene
+2025-09-22 15:15:32 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:15:51 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 15:15:55 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-22 15:15:58 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário eder fez logout - Usuário: eder
+2025-09-22 15:16:02 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:16:15 - INFO - ActivityLogger - Atividade registrada: ADMIN - Papel 'compras operador' editado - Usuário: admin
+2025-09-22 15:16:18 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 15:16:21 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário luciene fez login - Usuário: luciene
+2025-09-22 15:16:25 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário luciene fez logout - Usuário: luciene
+2025-09-22 15:16:29 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 15:16:42 - INFO - ActivityLogger - Atividade registrada: ADMIN - Papel 'compras operador' editado - Usuário: admin
+2025-09-22 15:16:42 - INFO - ActivityLogger - Atividade registrada: ADMIN - Papel 'compras operador' editado - Usuário: admin

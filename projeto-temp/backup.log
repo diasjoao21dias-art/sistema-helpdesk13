@@ -1,0 +1,332 @@
+2025-09-19 11:43:42,955 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-19 11:43:42,962 - BACKUP - INFO - ⚡ Otimizando banco de dados...
+2025-09-19 11:43:42,991 - BACKUP - INFO - 🔧 Otimização do Banco: SUCESSO
+2025-09-22 11:38:52,640 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 11:41:45,338 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 11:44:37,391 - BACKUP - INFO - emitting event "ticket_update" to all [/]
+2025-09-22 11:45:03,039 - BACKUP - INFO - emitting event "ticket_update" to all [/]
+2025-09-22 12:51:24,884 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 12:57:52,169 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 12:59:28,520 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 10:06:09,474 - BACKUP - INFO - emitting event "ticket_update" to all [/]
+2025-09-22 10:07:08,827 - BACKUP - INFO - emitting event "ticket_update" to all [/]
+2025-09-22 13:22:08,191 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:10:08,292 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:35:10,573 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:35:11,123 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:35:11,931 - BACKUP - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+2025-09-22 14:35:11,933 - BACKUP - ERROR - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1319, in process_response
+    response = self.ensure_sync(func)(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3110, in after_request
+    if hasattr(g, 'start_time'):
+               ^
+NameError: name 'g' is not defined
+2025-09-22 14:35:11,993 - BACKUP - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+2025-09-22 14:35:11,995 - BACKUP - ERROR - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1319, in process_response
+    response = self.ensure_sync(func)(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3110, in after_request
+    if hasattr(g, 'start_time'):
+               ^
+NameError: name 'g' is not defined
+2025-09-22 14:35:18,289 - BACKUP - ERROR - Exception on /favicon.ico [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+2025-09-22 14:35:18,290 - BACKUP - ERROR - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1319, in process_response
+    response = self.ensure_sync(func)(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3110, in after_request
+    if hasattr(g, 'start_time'):
+               ^
+NameError: name 'g' is not defined
+2025-09-22 14:36:04,214 - BACKUP - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+2025-09-22 14:36:04,216 - BACKUP - ERROR - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1319, in process_response
+    response = self.ensure_sync(func)(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3110, in after_request
+    if hasattr(g, 'start_time'):
+               ^
+NameError: name 'g' is not defined
+2025-09-22 14:36:11,248 - BACKUP - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+2025-09-22 14:36:11,249 - BACKUP - ERROR - Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 915, in full_dispatch_request
+    rv = self.preprocess_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1291, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3106, in before_request
+    g.start_time = datetime.now()
+    ^
+NameError: name 'g' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1319, in process_response
+    response = self.ensure_sync(func)(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/app.py", line 3110, in after_request
+    if hasattr(g, 'start_time'):
+               ^
+NameError: name 'g' is not defined
+2025-09-22 14:36:13,623 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:36:13,949 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:36:29,208 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.08ms | IP: 127.0.0.1
+2025-09-22 14:36:29,238 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 27.65ms | IP: 127.0.0.1
+2025-09-22 14:36:43,867 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 0.67ms | IP: 127.0.0.1
+2025-09-22 14:37:02,422 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:37:02,710 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:37:09,130 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 25.49ms | IP: 127.0.0.1
+2025-09-22 14:37:12,828 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.1ms | IP: 127.0.0.1
+2025-09-22 14:37:12,833 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 1.01ms | IP: 127.0.0.1
+2025-09-22 14:37:27,644 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:37:27,913 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:37:33,392 - BACKUP - INFO - GET /api/v1/stats | Status: 200 | Time: 1.27ms | IP: 127.0.0.1
+2025-09-22 14:37:37,424 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.11ms | IP: 127.0.0.1
+2025-09-22 14:37:37,427 - BACKUP - INFO - GET /api/v1/stats | Status: 200 | Time: 0.99ms | IP: 127.0.0.1
+2025-09-22 14:40:04,811 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:40:05,115 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:40:25,048 - BACKUP - ERROR - GET /api/v1/stats | Status: 401 | Time: 0.16ms | IP: 127.0.0.1
+2025-09-22 14:40:25,259 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 36.37ms | IP: 127.0.0.1
+2025-09-22 14:40:25,376 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.12ms | IP: 127.0.0.1
+2025-09-22 14:40:25,518 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.1ms | IP: 127.0.0.1
+2025-09-22 14:40:25,575 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.09ms | IP: 127.0.0.1
+2025-09-22 14:40:25,639 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.14ms | IP: 127.0.0.1
+2025-09-22 14:40:29,327 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.08ms | IP: 127.0.0.1
+2025-09-22 14:40:29,331 - BACKUP - ERROR - GET /api/v1/stats | Status: 401 | Time: 0.16ms | IP: 127.0.0.1
+2025-09-22 14:41:14,421 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:41:14,773 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:41:22,999 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 29.12ms | IP: 127.0.0.1
+2025-09-22 14:41:28,546 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.08ms | IP: 127.0.0.1
+2025-09-22 14:41:28,552 - BACKUP - ERROR - GET /api/v1/stats | Status: 500 | Time: 2.48ms | IP: 127.0.0.1
+2025-09-22 14:42:02,492 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 14:42:02,753 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 14:42:13,145 - BACKUP - INFO - GET /api/v1/stats | Status: 200 | Time: 1.68ms | IP: 127.0.0.1
+2025-09-22 14:42:17,305 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.08ms | IP: 127.0.0.1
+2025-09-22 14:42:17,309 - BACKUP - INFO - GET /api/v1/stats | Status: 200 | Time: 0.95ms | IP: 127.0.0.1
+2025-09-22 11:51:40,577 - BACKUP - INFO - Event: Sistema de logging avan�ado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 11:53:30,628 - BACKUP - INFO - Event: Sistema de logging avan�ado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 11:53:59,815 - BACKUP - INFO - Metric: route_chamados_novo | Value: 37.151ms
+2025-09-22 11:54:19,326 - BACKUP - INFO - Metric: route_chamados_novo | Value: 20.549999999999997ms
+2025-09-22 15:00:34,064 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:00:34,343 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:02:45,883 - BACKUP - INFO - Metric: route_chamados_novo | Value: 119.777ms
+2025-09-22 15:05:40,064 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:05:40,540 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:06:14,147 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:06:14,632 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:06:48,241 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:06:48,712 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:07:06,181 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:07:06,454 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:08:19,283 - BACKUP - INFO - Metric: route_chamados_novo | Value: 65.092ms
+2025-09-22 15:10:21,127 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:10:21,623 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:10:47,831 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:10:48,065 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:14:49,769 - BACKUP - INFO - Metric: route_chamados_novo | Value: 11.700000000000001ms
+2025-09-22 15:15:24,910 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:15:25,412 - BACKUP - INFO - Event: Sistema de logging avançado inicializado | Details: {"log_directory": "logs", "loggers_configured": ["system", "users", "api", "performance"]}
+2025-09-22 15:15:28,620 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.12ms | IP: 127.0.0.1
+2025-09-22 15:15:28,627 - BACKUP - ERROR - GET /api/v1/stats | Status: 401 | Time: 0.16ms | IP: 127.0.0.1
+2025-09-22 15:15:28,636 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 15:15:28,675 - BACKUP - INFO - GET /api/v1/setores | Status: 200 | Time: 42.2ms | IP: 127.0.0.1
+2025-09-22 15:15:28,681 - BACKUP - ERROR - GET /api/v1/chamados | Status: 401 | Time: 0.11ms | IP: 127.0.0.1
+2025-09-22 15:15:28,685 - BACKUP - ERROR - GET /api/v1/usuarios | Status: 401 | Time: 0.11ms | IP: 127.0.0.1
+2025-09-22 15:15:42,099 - BACKUP - INFO - GET /api/v1/setores | Status: 200 | Time: 0.21ms | IP: 127.0.0.1
+2025-09-22 15:16:02,345 - BACKUP - INFO - GET /api/v1/health | Status: 200 | Time: 0.1ms | IP: 127.0.0.1
