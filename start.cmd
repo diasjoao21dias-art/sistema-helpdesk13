@@ -1,5 +1,5 @@
 C:
 
-cd Sistema-os\Sistema-os\Sistema-OS-v9\TesteProgram\sistema-helpdesk12
+cd Sistema-os\Sistema-os\sistema-helpdesk13
 
 python USAR.py
