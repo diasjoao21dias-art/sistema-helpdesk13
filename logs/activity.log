@@ -15,3 +15,10 @@
 2025-09-22 10:10:27 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
 2025-09-22 13:22:24 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para medcenter - Usuário: Sistema
 2025-09-22 13:22:31 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 13:51:17 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-22 13:51:26 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:56:09 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-22 10:56:12 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-22 10:56:29 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-22 10:56:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-22 10:58:35 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
