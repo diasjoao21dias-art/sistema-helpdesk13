@@ -1,0 +1,7 @@
+2025-09-19 11:43:42,955 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-19 11:43:42,962 - BACKUP - INFO - ⚡ Otimizando banco de dados...
+2025-09-19 11:43:42,991 - BACKUP - INFO - 🔧 Otimização do Banco: SUCESSO
+2025-09-22 11:38:52,640 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 11:41:45,338 - BACKUP - INFO - ✅ Configurações de segurança aplicadas
+2025-09-22 11:44:37,391 - BACKUP - INFO - emitting event "ticket_update" to all [/]
+2025-09-22 11:45:03,039 - BACKUP - INFO - emitting event "ticket_update" to all [/]

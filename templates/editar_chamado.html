@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Editar Chamado</title></head>
+<body>
+<h2>Editar Chamado</h2>
+<form method="POST">
+  Título: <input type="text" name="titulo" value="{{ chamado.titulo }}"><br>
+  Descrição:<br><textarea name="descricao">{{ chamado.descricao }}</textarea><br>
+  <button type="submit">Salvar</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+  <h3 class="mb-3">Bem-vindo</h3>
+  <div>
+    <a class="btn btn-success" href="{{ url_for('chamado_novo') }}">Novo Chamado</a>
+  </div>
+</div>
+<p class="text-muted">Use o menu para acessar Chamados, Relatórios e Admin (se for administrador).</p>
+{% endblock %}
