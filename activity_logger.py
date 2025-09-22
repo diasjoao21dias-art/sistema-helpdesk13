@@ -399,14 +399,14 @@ def log_ticket_create(user_id: int, username: str, ticket_id: int, title: str):
     activity_logger.log_activity('CREATE', f'Criou chamado #{ticket_id}: {title}', 
                                 user_id, username, {'ticket_id': ticket_id, 'title': title})
 
-def log_admin_action(user_id: int, username: str, action: str, details: Dict = None):
+def log_admin_action(user_id: int, username: str, action: str, details: Optional[Dict] = None):
     """Registrar ação administrativa"""
     activity_logger.log_activity('ADMIN', action, user_id, username, details)
 
-def log_system_event(event: str, details: Dict = None):
+def log_system_event(event: str, details: Optional[Dict] = None):
     """Registrar evento do sistema"""
     activity_logger.log_activity('SYSTEM', event, details=details)
 
-def log_security_event(event: str, details: Dict = None):
+def log_security_event(event: str, details: Optional[Dict] = None):
     """Registrar evento de segurança"""
     activity_logger.log_activity('SECURITY', event, details=details)
