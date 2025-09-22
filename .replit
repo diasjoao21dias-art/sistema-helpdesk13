@@ -1,8 +1,6 @@
 modules = ["python-3.11"]
-
-[nix]
-channel = "stable-25_05"
-packages = ["cairo", "cargo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "iana-etc", "libiconv", "libxcrypt", "openssl", "pkg-config", "qhull", "rustc", "tcl", "tk"]
+[agent]
+expertMode = true
 
 [workflows]
 runButton = "Project"
@@ -14,15 +12,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Sistema Helpdesk"
+args = "Web Server"
 
 [[workflows.workflow]]
-name = "Sistema Helpdesk"
+name = "Web Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python app.py"
+args = "python -m http.server 5000"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -31,6 +29,3 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[agent]
-expertMode = true

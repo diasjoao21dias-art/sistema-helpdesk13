@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="mb-1"><i class="bi bi-gear me-2"></i>Gerenciamento do Sistema</h2>
+        <p class="text-muted mb-0">Configure e monitore o funcionamento do sistema</p>
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('index') }}">
+        <i class="bi bi-arrow-left me-2"></i>Voltar
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- System Statistics -->
+<div class="row mb-5">
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <i class="bi bi-ticket-perforated text-primary" style="font-size: 2.5rem;"></i>
+        <h4 class="mt-3 mb-1">{{ stats.total_chamados }}</h4>
+        <p class="text-muted mb-0">Total de Chamados</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <i class="bi bi-exclamation-circle text-warning" style="font-size: 2.5rem;"></i>
+        <h4 class="mt-3 mb-1">{{ stats.chamados_abertos }}</h4>
+        <p class="text-muted mb-0">Chamados Abertos</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <i class="bi bi-people text-info" style="font-size: 2.5rem;"></i>
+        <h4 class="mt-3 mb-1">{{ stats.total_usuarios }}</h4>
+        <p class="text-muted mb-0">Usuários Cadastrados</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <i class="bi bi-database text-success" style="font-size: 2.5rem;"></i>
+        <h4 class="mt-3 mb-1">{{ stats.db_size }}</h4>
+        <p class="text-muted mb-0">Tamanho do Banco</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- System Actions -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-tools me-2"></i>Manutenção do Sistema</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-grid gap-3">
+          <form method="POST" class="d-inline">
+            <input type="hidden" name="action" value="optimize_db">
+            <button type="submit" class="btn btn-success w-100" onclick="return confirm('Deseja otimizar o banco de dados? Esta operação pode demorar alguns minutos.')">
+              <i class="bi bi-speedometer2 me-2"></i>Otimizar Banco de Dados
+            </button>
+          </form>
+          
+          <form method="POST" class="d-inline">
+            <input type="hidden" name="action" value="clear_logs">
+            <button type="submit" class="btn btn-warning w-100" onclick="return confirm('Deseja remover todos os arquivos de relatórios temporários?')">
+              <i class="bi bi-trash me-2"></i>Limpar Arquivos Temporários
+            </button>
+          </form>
+          
+          <a href="{{ url_for('admin_backup') }}" class="btn btn-info w-100">
+            <i class="bi bi-download me-2"></i>Fazer Backup do Banco
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Informações do Sistema</h5>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <span class="fw-medium">Versão do Sistema:</span>
+              <span class="badge bg-primary">v2.0</span>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <span class="fw-medium">Arquivos de Relatório:</span>
+              <span class="badge bg-secondary">{{ stats.report_files }} arquivos</span>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <span class="fw-medium">Última Atualização:</span>
+              <span class="text-muted">Setembro 2025</span>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+              <span class="fw-medium">Status do Sistema:</span>
+              <span class="badge bg-success">
+                <i class="bi bi-check-circle me-1"></i>Operacional
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- System Configuration -->
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-sliders me-2"></i>Configurações do Sistema</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="feature-box p-4 text-center bg-light rounded">
+              <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+              <h6 class="mt-3 mb-2">Segurança</h6>
+              <p class="text-muted small mb-3">Autenticação baseada em sessão com controle de acesso por função</p>
+              <span class="badge bg-success">Ativo</span>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="feature-box p-4 text-center bg-light rounded">
+              <i class="bi bi-diagram-3 text-info" style="font-size: 2rem;"></i>
+              <h6 class="mt-3 mb-2">Setores</h6>
+              <p class="text-muted small mb-3">Controle de acesso baseado em setores (T.I, Manutenção, Etiene)</p>
+              <span class="badge bg-success">Configurado</span>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="feature-box p-4 text-center bg-light rounded">
+              <i class="bi bi-graph-up text-warning" style="font-size: 2rem;"></i>
+              <h6 class="mt-3 mb-2">Relatórios</h6>
+              <p class="text-muted small mb-3">Geração automática de relatórios em PDF, Excel e CSV</p>
+              <span class="badge bg-success">Operacional</span>
+            </div>
+          </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary mb-3"><i class="bi bi-list-check me-2"></i>Recursos Ativos</h6>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                <span>Gestão de Chamados</span>
+                <i class="bi bi-check-circle-fill text-success"></i>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                <span>Controle de Usuários</span>
+                <i class="bi bi-check-circle-fill text-success"></i>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                <span>Sistema de Relatórios</span>
+                <i class="bi bi-check-circle-fill text-success"></i>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                <span>Backup Automático</span>
+                <i class="bi bi-check-circle-fill text-success"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <h6 class="text-primary mb-3"><i class="bi bi-person-gear me-2"></i>Permissões por Função</h6>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item border-0 px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span><strong>Admin</strong> - Acesso total</span>
+                  <span class="badge bg-danger">Completo</span>
+                </div>
+                <small class="text-muted">Gerenciar usuários, chamados, relatórios e sistema</small>
+              </div>
+              <div class="list-group-item border-0 px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span><strong>Operador</strong> - Por setor</span>
+                  <span class="badge bg-warning">Limitado</span>
+                </div>
+                <small class="text-muted">Visualizar e fechar chamados do seu setor apenas</small>
+              </div>
+              <div class="list-group-item border-0 px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span><strong>Usuário</strong> - Próprios chamados</span>
+                  <span class="badge bg-info">Restrito</span>
+                </div>
+                <small class="text-muted">Criar e visualizar apenas seus próprios chamados</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if stats.error %}
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="alert alert-danger">
+      <i class="bi bi-exclamation-triangle me-2"></i>
+      <strong>Erro:</strong> {{ stats.error }}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

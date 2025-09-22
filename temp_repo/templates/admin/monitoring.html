@@ -1,0 +1,337 @@
+{% extends "admin/dashboard.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Admin Sidebar -->
+    <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Menu Administrativo</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="bi bi-people"></i> Usuários
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/sectors">
+              <i class="bi bi-building"></i> Setores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/roles">
+              <i class="bi bi-shield-check"></i> Papéis & Permissões
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/relatorios">
+              <i class="bi bi-bar-chart"></i> Relatórios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/settings">
+              <i class="bi bi-gear"></i> Configurações
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Monitoramento</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/monitoring">
+              <i class="bi bi-activity"></i> Status do Sistema
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/logs">
+              <i class="bi bi-journal-text"></i> Logs de Atividades
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/maintenance">
+              <i class="bi bi-tools"></i> Manutenção
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/audit">
+              <i class="bi bi-shield-lock"></i> Auditoria
+            </a>
+          </li>
+        </ul>
+        
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Sistema</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="bi bi-house"></i> Voltar ao Sistema
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+          <i class="bi bi-activity text-primary"></i> Monitoramento do Sistema
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshMonitoring()">
+              <i class="bi bi-arrow-clockwise"></i> Atualizar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Status Cards -->
+      <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+          <div class="card bg-{{ system_status.overall_status_color }} text-white shadow">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <div class="text-white-50 small">Status Geral</div>
+                  <div class="h5 mb-0 font-weight-bold">{{ system_status.overall_status }}</div>
+                </div>
+                <div class="align-self-center">
+                  <i class="bi bi-{{ system_status.overall_icon }} fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+          <div class="card bg-info text-white shadow">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <div class="text-white-50 small">Usuários Online</div>
+                  <div class="h5 mb-0 font-weight-bold" id="online-users">{{ online_users }}</div>
+                </div>
+                <div class="align-self-center">
+                  <i class="bi bi-people fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+          <div class="card bg-{{ system_status.db_status_color }} text-white shadow">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <div class="text-white-50 small">Banco de Dados</div>
+                  <div class="h5 mb-0 font-weight-bold">{{ system_status.db_status }}</div>
+                </div>
+                <div class="align-self-center">
+                  <i class="bi bi-database fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+          <div class="card bg-{{ system_status.backup_status_color }} text-white shadow">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <div class="text-white-50 small">Último Backup</div>
+                  <div class="h5 mb-0 font-weight-bold">{{ system_status.last_backup }}</div>
+                </div>
+                <div class="align-self-center">
+                  <i class="bi bi-shield-check fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Metrics -->
+      <div class="row mb-4">
+        <div class="col-lg-6">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-cpu"></i> Performance do Sistema
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">CPU: {{ performance.cpu_percent }}%</label>
+                <div class="progress">
+                  <div class="progress-bar bg-{{ performance.cpu_color }}" role="progressbar" 
+                       style="width: {{ performance.cpu_percent }}%" 
+                       aria-valuenow="{{ performance.cpu_percent }}" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Memória: {{ performance.memory_percent }}%</label>
+                <div class="progress">
+                  <div class="progress-bar bg-{{ performance.memory_color }}" role="progressbar" 
+                       style="width: {{ performance.memory_percent }}%" 
+                       aria-valuenow="{{ performance.memory_percent }}" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Disco: {{ performance.disk_percent }}%</label>
+                <div class="progress">
+                  <div class="progress-bar bg-{{ performance.disk_color }}" role="progressbar" 
+                       style="width: {{ performance.disk_percent }}%" 
+                       aria-valuenow="{{ performance.disk_percent }}" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-database"></i> Estatísticas do Banco
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="text-center">
+                    <div class="h5 font-weight-bold text-primary">{{ db_stats.total_records }}</div>
+                    <div class="small text-gray-500">Total de Registros</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="text-center">
+                    <div class="h5 font-weight-bold text-success">{{ db_stats.db_size }}</div>
+                    <div class="small text-gray-500">Tamanho do Banco</div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="text-center">
+                    <div class="h5 font-weight-bold text-info">{{ db_stats.active_tickets }}</div>
+                    <div class="small text-gray-500">Chamados Ativos</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="text-center">
+                    <div class="h5 font-weight-bold text-warning">{{ db_stats.total_users }}</div>
+                    <div class="small text-gray-500">Usuários Total</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-clock-history"></i> Atividades Recentes
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Hora</th>
+                      <th>Usuário</th>
+                      <th>Ação</th>
+                      <th>Detalhes</th>
+                      <th>IP</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-activities">
+                    {% for activity in recent_activities %}
+                    <tr>
+                      <td>{{ activity.timestamp }}</td>
+                      <td>{{ activity.user }}</td>
+                      <td>
+                        <span class="badge bg-{{ activity.type_color }}">{{ activity.action }}</span>
+                      </td>
+                      <td>{{ activity.details }}</td>
+                      <td>{{ activity.ip }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+// Auto-refresh monitoring data every 30 seconds
+setInterval(function() {
+    refreshMonitoring();
+}, 30000);
+
+function refreshMonitoring() {
+    fetch('/admin/monitoring/data')
+        .then(response => response.json())
+        .then(data => {
+            // Update online users
+            document.getElementById('online-users').textContent = data.online_users;
+            
+            // Update recent activities
+            const activitiesTable = document.getElementById('recent-activities');
+            activitiesTable.innerHTML = '';
+            
+            data.recent_activities.forEach(activity => {
+                const row = activitiesTable.insertRow();
+                row.innerHTML = `
+                    <td>${activity.timestamp}</td>
+                    <td>${activity.user}</td>
+                    <td><span class="badge bg-${activity.type_color}">${activity.action}</span></td>
+                    <td>${activity.details}</td>
+                    <td>${activity.ip}</td>
+                `;
+            });
+        })
+        .catch(error => console.error('Erro ao atualizar monitoramento:', error));
+}
+</script>
+{% endblock %}
