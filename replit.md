@@ -1,14 +1,15 @@
-# Sistema Olivion - Help Desk
+# Sistema HelpDesk 13 - Olivion
 
 ## Visão Geral
-Sistema de gestão de chamados/tickets instalado com sucesso a partir do repositório GitHub: https://github.com/diasjoao21dias-art/teste.git
+Sistema de gestão de chamados/tickets instalado com sucesso a partir do repositório GitHub: https://github.com/diasjoao21dias-art/sistema-helpdesk13.git
 
 ### Status Atual
 - ✅ **Sistema funcionando** na porta 5000
-- ✅ **Base de dados SQLite** inicializada
-- ✅ **Todas as dependências** instaladas
+- ✅ **Base de dados SQLite** inicializada e limpa
+- ✅ **Todas as dependências Python** instaladas
 - ✅ **Sistema de licenciamento** ativo
 - ✅ **Workflow configurado** e rodando automaticamente
+- ✅ **Scripts LIMPAR_BANCO.py e USAR.py executados** com sucesso
 
 ## Informações de Acesso
 
@@ -85,14 +86,14 @@ Sistema de gestão de chamados/tickets instalado com sucesso a partir do reposit
 - Telefonia → Telecomunicações
 
 ## Modificações Recentes
-- **22/09/2025**: Instalação completa realizada
-  - Projeto clonado do GitHub público
-  - Dependências Python instaladas via uv
-  - Banco de dados SQLite configurado
+- **22/09/2025**: Nova instalação do projeto sistema-helpdesk13
+  - Projeto clonado do GitHub: https://github.com/diasjoao21dias-art/sistema-helpdesk13.git
+  - Dependências Python instaladas via packager_tool (Flask, SQLAlchemy, SocketIO, etc.)
+  - Script LIMPAR_BANCO.py executado (banco limpo para nova máquina)
+  - Script USAR.py executado (sistema iniciado)
   - Sistema configurado para Replit (porta 5000)
-  - Workflow criado para execução automática
-  - Sistema de logs funcionando
-  - Backup automático configurado
+  - Workflow "Sistema HelpDesk" criado e funcionando
+  - Banco de dados SQLite inicializado automaticamente
 
 ## Logs e Monitoramento
 - Sistema de logs integrado e funcionando
