@@ -1,0 +1,198 @@
+==================================================================
+         GUIA DE INSTALAÇÃO - SISTEMA OLIVION
+         Gestão de Chamados/Tickets com Sistema de Licenças
+==================================================================
+
+📋 PRÉ-REQUISITOS
+- Windows 10/11 ou Linux
+- Python 3.8+ instalado (https://python.org/downloads)
+- Conexão com internet (para instalar dependências)
+
+🔧 PASSO A PASSO DE INSTALAÇÃO
+
+1️⃣ BAIXAR O SISTEMA
+   - Copie toda a pasta do sistema para seu computador
+   - Exemplo: C:\Sistema-Olivion\
+
+2️⃣ INSTALAR DEPENDÊNCIAS
+   Abra o terminal/prompt na pasta do sistema:
+   
+   Windows:
+   cd C:\Sistema-Olivion\Sistema-OS-v9\TesteProgram\
+   pip install -r requirements.txt
+   pip install pyopenssl
+   
+   Linux:
+   cd ~/Sistema-Olivion/Sistema-OS-v9/TesteProgram/
+   pip3 install -r requirements.txt
+   pip3 install pyopenssl
+
+3️⃣ LIMPAR BANCO PARA SUA MÁQUINA (IMPORTANTE!)
+   Execute APENAS na primeira instalação:
+   
+   Windows:
+   python LIMPAR_BANCO.py
+   
+   Linux:
+   python3 LIMPAR_BANCO.py
+
+4️⃣ EXECUTAR O SISTEMA
+   Windows (na pasta TesteProgram):
+   python USAR.py
+   
+   Linux (na pasta TesteProgram):
+   python3 USAR.py
+
+🌐 ACESSAR O SISTEMA
+   Abra seu navegador e vá para:
+   http://localhost:3003
+
+🔑 LOGIN PADRÃO
+   Usuário: admin
+   Senha: admin
+   
+   ⚠️  IMPORTANTE: Altere a senha após o primeiro login!
+
+🔒 DOWNLOADS SEGUROS (PDF/Excel)
+   Para evitar avisos de "download inseguro" no navegador local:
+   
+   Windows:
+   set ENABLE_LOCAL_SSL=1
+   python USAR.py
+   
+   Linux:
+   export ENABLE_LOCAL_SSL=1
+   python3 USAR.py
+   
+   - Primeira vez: Aceite o certificado autoassinado no navegador
+   - Acesse: https://localhost:5000 (com HTTPS)
+   - Downloads de relatórios funcionarão sem avisos de segurança
+   
+   💡 Se não ativar SSL, use: http://localhost:5000 (downloads podem ter aviso)
+
+==================================================================
+📊 FUNCIONALIDADES INCLUÍDAS
+==================================================================
+
+✅ GESTÃO DE CHAMADOS/TICKETS
+   - Abertura de chamados por usuários
+   - Atribuição por setores (T.I, Manutenção, CCIH, Telefonia)
+   - Controle de status e urgência
+   - Upload de imagens
+   - Histórico completo
+
+✅ SISTEMA DE USUÁRIOS
+   - 3 níveis: Admin, Operador, Usuário
+   - Controle por setores
+   - Autenticação segura
+
+✅ RELATÓRIOS AVANÇADOS
+   - Gráficos e estatísticas
+   - Exportação PDF e Excel
+   - Filtros por período, setor, status
+
+✅ SISTEMA DE LICENÇAS COMERCIAL
+   - Licenciamento por hardware
+   - Controle de 30 dias
+   - 3 tipos de licença
+   - Ativação remota
+
+✅ RECURSOS AVANÇADOS
+   - Interface PWA (app-like)
+   - Notificações em tempo real
+   - Sistema de backup
+   - Logs de auditoria
+   - Monitoramento do sistema
+
+==================================================================
+⚙️  CONFIGURAÇÕES AVANÇADAS
+==================================================================
+
+📁 ESTRUTURA DE PASTAS
+   - static/uploads/ → Imagens dos chamados
+   - static/relatorios/ → Relatórios gerados
+   - templates/ → Interfaces do usuário
+   - sistema_os.db → Banco de dados SQLite
+
+🔐 PRIMEIRO ACESSO
+   1. Acesse http://localhost:3003
+   2. Login: admin / admin
+   3. Vá em Admin > Usuários
+   4. Altere a senha do admin
+   5. Crie operadores e usuários
+
+🔑 CONFIGURAÇÃO DE SEGURANÇA (OBRIGATÓRIO)
+   Para uso em produção, altere a chave secreta:
+   1. Crie arquivo .env na pasta TesteProgram
+   2. Adicione: FLASK_SECRET_KEY=sua-chave-secreta-forte-aqui
+   3. Ou edite app.py linha 94: app.secret_key = "sua-chave-forte"
+
+👥 CRIAR USUÁRIOS
+   - Admin > Usuários > Novo Usuário
+   - Tipos: admin, operador, usuario
+   - Atribua setores aos operadores
+
+📋 GERENCIAR SETORES
+   - T.I → Problemas técnicos
+   - Manutenção → Manutenção predial
+   - CCIH / SESMT → Segurança do trabalho
+   - Telefonia → Telecomunicações
+
+==================================================================
+🔧 SOLUÇÃO DE PROBLEMAS
+==================================================================
+
+❌ ERRO: "Porta 3003 em uso"
+   → Feche outros programas usando a porta ou altere em USAR.py
+
+❌ ERRO: "ModuleNotFoundError"
+   → Execute: pip install -r requirements.txt
+
+❌ ERRO: "Permission denied"
+   → Execute como administrador (Windows) ou com sudo (Linux)
+
+❌ ERRO: "Database locked"
+   → Feche completamente o sistema e inicie novamente
+
+❌ Sistema lento
+   → Feche navegador e abra novamente
+   → Reinicie o sistema com python USAR.py
+
+==================================================================
+🚀 RECURSOS COMERCIAIS
+==================================================================
+
+💼 SISTEMA DE LICENÇAS
+   - Acesse: http://localhost:3003/license/activation
+   - 3 tipos: Básica, Profissional, Empresarial
+   - Controle por ID da máquina
+   - Renovação a cada 30 dias
+
+📊 RELATÓRIOS EXECUTIVOS
+   - Gráficos de produtividade
+   - Análise por setor/operador
+   - Exportação profissional
+   - Métricas de performance
+
+🔒 SEGURANÇA EMPRESARIAL
+   - Logs de auditoria completos
+   - Backup automático
+   - Monitoramento em tempo real
+   - Controle de acesso granular
+
+==================================================================
+📞 SUPORTE TÉCNICO
+==================================================================
+
+Para suporte técnico e licenciamento comercial:
+
+📧 Email: suporte@sistemaolivion.com
+🌐 Site: www.sistemaolivion.com
+📱 WhatsApp: (11) 99999-9999
+
+Documentação completa disponível no site oficial.
+
+==================================================================
+              Sistema Olivion v2.0
+         © 2025 - Todos os direitos reservados
+==================================================================

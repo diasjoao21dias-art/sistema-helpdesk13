@@ -1,0 +1,186 @@
+{% extends "admin/dashboard.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Admin Sidebar -->
+    <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Menu Administrativo</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="bi bi-people"></i> Usuários
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/sectors">
+              <i class="bi bi-building"></i> Setores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/roles">
+              <i class="bi bi-shield-check"></i> Papéis & Permissões
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/relatorios">
+              <i class="bi bi-bar-chart"></i> Relatórios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/settings">
+              <i class="bi bi-gear"></i> Configurações
+            </a>
+          </li>
+        </ul>
+        
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Sistema</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="bi bi-house"></i> Voltar ao Sistema
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Papéis & Permissões</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <a href="/admin/roles/new" class="btn btn-primary">
+            <i class="bi bi-plus"></i> Novo Papel
+          </a>
+        </div>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>Nome de Exibição</th>
+                  <th>Descrição</th>
+                  <th>Permissões</th>
+                  <th>Usuários</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in roles_with_counts %}
+                {% set role = item.role %}
+                <tr>
+                  <td>{{ role.id }}</td>
+                  <td><code>{{ role.name }}</code></td>
+                  <td>{{ role.display_name }}</td>
+                  <td>{{ role.description or '-' }}</td>
+                  <td>
+                    {% if role.permissions %}
+                      {% set perms = role.permissions|fromjson %}
+                      <span class="badge bg-info">{{ perms|length }} permissões</span>
+                    {% else %}
+                      <span class="text-muted">Nenhuma</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <span class="badge bg-secondary">{{ item.user_count }} usuários</span>
+                  </td>
+                  <td>
+                    <a href="/admin/roles/edit/{{ role.id }}" class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    {% if role.name not in ['admin', 'operador', 'usuario'] %}
+                    <form method="POST" action="/admin/roles/delete/{{ role.id }}" class="d-inline" 
+                          onsubmit="return confirm('Tem certeza que deseja excluir este papel?')">
+                      <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash"></i> Excluir
+                      </button>
+                    </form>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="7" class="text-center text-muted">Nenhum papel cadastrado</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permission Legend -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="mb-0">Permissões Disponíveis</h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6>Visualização</h6>
+                  <ul class="list-unstyled">
+                    <li><code>view_all</code> - Ver todos os chamados</li>
+                    <li><code>view_sector</code> - Ver chamados do setor</li>
+                    <li><code>view_own</code> - Ver próprios chamados</li>
+                    <li><code>view_reports</code> - Visualizar relatórios</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <h6>Ações</h6>
+                  <ul class="list-unstyled">
+                    <li><code>create_tickets</code> - Criar chamados</li>
+                    <li><code>edit_all</code> - Editar todos os chamados</li>
+                    <li><code>edit_sector</code> - Editar chamados do setor</li>
+                    <li><code>close_tickets</code> - Fechar chamados</li>
+                    <li><code>delete_all</code> - Excluir qualquer chamado</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h6>Administração</h6>
+                  <ul class="list-unstyled">
+                    <li><code>manage_users</code> - Gerenciar usuários</li>
+                    <li><code>manage_sectors</code> - Gerenciar setores</li>
+                    <li><code>manage_roles</code> - Gerenciar papéis</li>
+                    <li><code>manage_settings</code> - Gerenciar configurações</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}

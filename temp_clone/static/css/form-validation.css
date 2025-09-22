@@ -1,0 +1,158 @@
+/**
+ * CSS para Sistema de Validação de Formulários - Sistema Olivion
+ */
+
+/* Estilos para campos com validação */
+.form-control.is-valid {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Mensagens de erro personalizadas */
+.field-errors {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.field-errors div {
+    margin-bottom: 0.25rem;
+}
+
+.field-errors div:last-child {
+    margin-bottom: 0;
+}
+
+/* Indicador de força da senha */
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.password-strength .progress {
+    height: 4px;
+    margin-bottom: 0.25rem;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength small {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Destacar campos obrigatórios para COMPRAS */
+.required-for-compras input {
+    border-left: 4px solid #ffc107;
+}
+
+.compras-warning {
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Animações para feedback visual */
+.form-control {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Validação de upload de arquivo */
+.file-upload-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.file-upload-success {
+    color: #198754;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Indicadores visuais durante validação */
+.validating {
+    position: relative;
+}
+
+.validating::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #dee2e6;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Melhorar aparência dos campos obrigatórios */
+.form-label.required::after {
+    content: ' *';
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Estilos para diferentes tipos de validação */
+.validation-success {
+    border-left: 4px solid #198754;
+    background-color: rgba(25, 135, 84, 0.05);
+}
+
+.validation-warning {
+    border-left: 4px solid #ffc107;
+    background-color: rgba(255, 193, 7, 0.05);
+}
+
+.validation-error {
+    border-left: 4px solid #dc3545;
+    background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .field-errors {
+        font-size: 0.8rem;
+    }
+    
+    .password-strength small {
+        font-size: 0.7rem;
+    }
+    
+    .compras-warning {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* Estilos para formulários em modo escuro (se implementado) */
+[data-theme="dark"] .form-control.is-valid {
+    border-color: #28a745;
+}
+
+[data-theme="dark"] .form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+[data-theme="dark"] .field-errors {
+    color: #ff6b6b;
+}
+
+[data-theme="dark"] .password-strength .progress {
+    background-color: #495057;
+}

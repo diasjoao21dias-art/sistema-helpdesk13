@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Admin - Usuários{% endblock %}
+{% block content %}
+<div class="d-flex mb-3">
+  <a class="btn btn-success" href="{{ url_for('admin_novo_usuario') }}">+ Novo usuário</a>
+</div>
+<table class="table table-bordered table-hover">
+  <thead><tr><th>#</th><th>Usuário</th><th>Função</th><th>Ativo</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.username }}</td><td>{{ u.role }}</td><td>{{ 'Sim' if u.active else 'Não' }}</td>
+      <td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('admin_editar_usuario', uid=u.id) }}">Editar</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

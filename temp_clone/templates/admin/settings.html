@@ -1,0 +1,314 @@
+{% extends "admin/dashboard.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Admin Sidebar -->
+    <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Menu Administrativo</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="bi bi-people"></i> Usuários
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/sectors">
+              <i class="bi bi-building"></i> Setores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/roles">
+              <i class="bi bi-shield-check"></i> Papéis & Permissões
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/relatorios">
+              <i class="bi bi-bar-chart"></i> Relatórios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/settings">
+              <i class="bi bi-gear"></i> Configurações
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Monitoramento</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/monitoring">
+              <i class="bi bi-activity"></i> Status do Sistema
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/logs">
+              <i class="bi bi-journal-text"></i> Logs de Atividades
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/maintenance">
+              <i class="bi bi-tools"></i> Manutenção
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/audit">
+              <i class="bi bi-shield-lock"></i> Auditoria
+            </a>
+          </li>
+        </ul>
+        
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Sistema</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="bi bi-house"></i> Voltar ao Sistema
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Configurações do Sistema</h1>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="/admin/settings/update">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Configurações Gerais</h6>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="system_name" class="form-label">Nome do Sistema</label>
+                  <input type="text" class="form-control" id="system_name" name="setting_system_name" 
+                         value="{{ settings.get('system_name', 'Sistemas Olivion') }}">
+                  <div class="form-text">Nome exibido na barra de título e relatórios</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="service_question_text" class="form-label">Texto da Pergunta de Serviço</label>
+                  <input type="text" class="form-control" id="service_question_text" name="setting_service_question_text" 
+                         value="{{ settings.get('service_question_text', 'Qual serviço você precisa?') }}">
+                  <div class="form-text">Texto exibido no formulário de criação de chamados</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="timezone" class="form-label">Fuso Horário</label>
+                  <select class="form-select" id="timezone" name="setting_timezone">
+                    <option value="America/Sao_Paulo" {{ 'selected' if settings.get('timezone') == 'America/Sao_Paulo' else '' }}>
+                      America/São Paulo (GMT-3)
+                    </option>
+                    <option value="America/Manaus" {{ 'selected' if settings.get('timezone') == 'America/Manaus' else '' }}>
+                      America/Manaus (GMT-4)
+                    </option>
+                    <option value="America/Rio_Branco" {{ 'selected' if settings.get('timezone') == 'America/Rio_Branco' else '' }}>
+                      America/Rio Branco (GMT-5)
+                    </option>
+                    <option value="UTC" {{ 'selected' if settings.get('timezone') == 'UTC' else '' }}>
+                      UTC (GMT+0)
+                    </option>
+                  </select>
+                  <div class="form-text">Fuso horário usado em todo o sistema</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="auto_refresh_interval" class="form-label">Intervalo de Atualização Automática (segundos)</label>
+                  <select class="form-select" id="auto_refresh_interval" name="setting_auto_refresh_interval">
+                    <option value="10" {{ 'selected' if settings.get('auto_refresh_interval') == '10' else '' }}>10 segundos</option>
+                    <option value="20" {{ 'selected' if settings.get('auto_refresh_interval') == '20' else '' }}>20 segundos</option>
+                    <option value="30" {{ 'selected' if settings.get('auto_refresh_interval') == '30' else '' }}>30 segundos</option>
+                    <option value="60" {{ 'selected' if settings.get('auto_refresh_interval') == '60' else '' }}>1 minuto</option>
+                    <option value="120" {{ 'selected' if settings.get('auto_refresh_interval') == '120' else '' }}>2 minutos</option>
+                    <option value="0" {{ 'selected' if settings.get('auto_refresh_interval') == '0' else '' }}>Desabilitado</option>
+                  </select>
+                  <div class="form-text">Frequência de atualização automática da lista de chamados</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Configurações de Relatórios</h6>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="report_columns" class="form-label">Colunas dos Relatórios</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="id" id="col_id" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_id">ID</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="titulo" id="col_titulo" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_titulo">Título</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="status" id="col_status" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_status">Status</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="setor" id="col_setor" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_setor">Setor</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="criado_em" id="col_criado_em" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_criado_em">Criado em</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="fechado_em" id="col_fechado_em" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_fechado_em">Fechado em</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="urgencia" id="col_urgencia" name="setting_report_columns" checked>
+                    <label class="form-check-label" for="col_urgencia">Urgência</label>
+                  </div>
+                  <div class="form-text">Selecione as colunas que devem aparecer nos relatórios</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+                <h6 class="mb-0">Configurações Avançadas</h6>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="max_file_size" class="form-label">Tamanho Máximo de Arquivo (MB)</label>
+                  <input type="number" class="form-control" id="max_file_size" name="setting_max_file_size" 
+                         value="{{ settings.get('max_file_size', '10') }}" min="1" max="100">
+                  <div class="form-text">Tamanho máximo para upload de arquivos em anexos</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="session_timeout" class="form-label">Timeout de Sessão (minutos)</label>
+                  <input type="number" class="form-control" id="session_timeout" name="setting_session_timeout" 
+                         value="{{ settings.get('session_timeout', '60') }}" min="5" max="480">
+                  <div class="form-text">Tempo antes do usuário ser desconectado automaticamente</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nova seção: Banco de Dados -->
+            <div class="card mt-3">
+              <div class="card-header">
+                <h6 class="mb-0">
+                  <i class="bi bi-database"></i> Gerenciar Banco de Dados
+                </h6>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="text-muted">Exportar Banco</h6>
+                    <p class="small">Baixar uma cópia completa do banco de dados</p>
+                    <a href="/admin/database/export" class="btn btn-success btn-sm" target="_blank">
+                      <i class="bi bi-download"></i> Exportar Banco de Dados
+                    </a>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="text-muted">Importar Banco</h6>
+                    <p class="small">Restaurar banco de dados a partir de arquivo</p>
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#importDatabaseModal">
+                      <i class="bi bi-upload"></i> Importar Banco de Dados
+                    </button>
+                  </div>
+                </div>
+                <hr>
+                <div class="alert alert-warning mt-3">
+                  <i class="bi bi-exclamation-triangle"></i>
+                  <strong>Atenção:</strong> A importação substituirá completamente o banco atual. Faça backup antes de importar!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check"></i> Salvar Configurações
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+<!-- Modal para importar banco de dados -->
+<div class="modal fade" id="importDatabaseModal" tabindex="-1" aria-labelledby="importDatabaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importDatabaseModalLabel">
+          <i class="bi bi-upload"></i> Importar Banco de Dados
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="/admin/database/import" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i>
+            <strong>ATENÇÃO:</strong> Esta operação irá substituir completamente o banco de dados atual. 
+            Todos os dados existentes serão perdidos!
+          </div>
+          
+          <div class="mb-3">
+            <label for="database_file" class="form-label">Arquivo do Banco de Dados</label>
+            <input type="file" class="form-control" id="database_file" name="database_file" 
+                   accept=".db,.sqlite,.sqlite3" required>
+            <div class="form-text">
+              Selecione um arquivo de banco SQLite (.db, .sqlite, .sqlite3)
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="confirm_import" name="confirm_import" required>
+              <label class="form-check-label" for="confirm_import">
+                <strong>Confirmo que entendo que esta operação irá apagar todos os dados atuais</strong>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-upload"></i> Importar e Substituir
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
