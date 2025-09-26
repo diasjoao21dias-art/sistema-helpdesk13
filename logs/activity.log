@@ -57,3 +57,27 @@
 2025-09-23 21:24:48 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
 2025-09-23 21:25:06 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
 2025-09-24 07:11:35 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 13:29:35 - INFO - ActivityLogger - Atividade registrada: ADMIN - Licença ativada para Hospital Med Center - Usuário: Sistema
+2025-09-24 13:29:48 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 13:58:47 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 14:00:01 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-24 11:23:45 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 11:24:01 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-24 11:24:04 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de relatórios - 72 arquivos removidos - Usuário: admin
+2025-09-24 11:24:07 - INFO - ActivityLogger - Limpeza de atividades: 0 registros removidos
+2025-09-24 11:24:07 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de logs - 0 registros removidos - Usuário: admin
+2025-09-24 14:26:48 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-24 14:28:24 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 14:28:32 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-24 14:28:39 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário eder fez login - Usuário: eder
+2025-09-24 14:28:44 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário eder fez logout - Usuário: eder
+2025-09-24 14:28:49 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 14:29:10 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-24 14:29:24 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de relatórios - 12 arquivos removidos - Usuário: admin
+2025-09-24 16:20:17 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-24 20:08:46 - INFO - ActivityLogger - Atividade registrada: LOGOUT - Usuário admin fez logout - Usuário: admin
+2025-09-25 13:00:19 - INFO - ActivityLogger - Atividade registrada: LOGIN - Usuário admin fez login - Usuário: admin
+2025-09-25 13:00:46 - INFO - ActivityLogger - Atividade registrada: ADMIN - Otimização do banco de dados - Usuário: admin
+2025-09-25 13:00:49 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de relatórios - 6 arquivos removidos - Usuário: admin
+2025-09-25 13:00:52 - INFO - ActivityLogger - Limpeza de atividades: 0 registros removidos
+2025-09-25 13:00:52 - INFO - ActivityLogger - Atividade registrada: ADMIN - Limpeza de logs - 0 registros removidos - Usuário: admin

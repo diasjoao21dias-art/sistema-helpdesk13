@@ -115,11 +115,18 @@ import secrets
 app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 # Configuração de banco de dados SQLite
 
-# FORÇAR USO DE SQLITE - SEMPRE FUNCIONANDO
+# CONFIGURAÇÃO OTIMIZADA DE SQLITE PARA PRODUÇÃO
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sistema_os.db"
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     'pool_pre_ping': True,
     'pool_recycle': 300,
+    'connect_args': {
+        'timeout': 10,
+        'check_same_thread': False,  # Permite múltiplas threads
+    },
+    'pool_timeout': 20,
+    'pool_size': 10,
+    'max_overflow': 20,
 }
 print("🗄️ Usando SQLite para desenvolvimento...")
 
@@ -152,7 +159,43 @@ def fromjson_filter(value):
         return []
 
 db = SQLAlchemy(app)
-socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
+
+# Configuração SocketIO para produção
+import os
+redis_url = os.getenv('REDIS_URL')
+
+if redis_url:
+    # Produção com Redis para múltiplos workers
+    socketio = SocketIO(app, 
+                       cors_allowed_origins="*",
+                       logger=True, 
+                       engineio_logger=False,
+                       async_mode='eventlet',
+                       message_queue=redis_url,
+                       ping_timeout=60,
+                       ping_interval=25)
+    print("✅ SocketIO configurado para múltiplos workers com Redis")
+else:
+    # Desenvolvimento/produção single-worker
+    try:
+        import eventlet
+        socketio = SocketIO(app, 
+                           cors_allowed_origins="*", 
+                           logger=True, 
+                           engineio_logger=False,
+                           async_mode='eventlet',
+                           ping_timeout=60,
+                           ping_interval=25)
+        print("⚠️ SocketIO single-worker com eventlet (use Redis para múltiplos workers)")
+    except ImportError:
+        socketio = SocketIO(app, 
+                           cors_allowed_origins="*", 
+                           logger=True, 
+                           engineio_logger=False,
+                           async_mode='threading',
+                           ping_timeout=60,
+                           ping_interval=25)
+        print("⚠️ SocketIO single-worker com threading")
 
 # Performance optimization: Add cache headers for static files
 @app.after_request
@@ -480,6 +523,14 @@ def ensure_columns():
             db_path = "sistema_os.db"
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()
+        
+        # WAL mode uma vez apenas (persiste no arquivo)
+        try:
+            cur.execute("PRAGMA journal_mode=WAL")
+            print("✅ WAL mode configurado (persiste)")
+        except Exception as pragma_e:
+            print(f"⚠️ Erro ao configurar WAL: {pragma_e}")
+        
         def has_col(table, col):
             cur.execute(f'PRAGMA table_info({table})')
             return any(r[1] == col for r in cur.fetchall())
@@ -507,9 +558,36 @@ def ensure_columns():
     except Exception as e:
         print("Aviso: não consegui garantir colunas de setor:", e)
 
+def configure_sqlite_pragmas():
+    """Configurar PRAGMAs SQLite para produção via eventos SQLAlchemy"""
+    from sqlalchemy import event
+    
+    @event.listens_for(db.engine, "connect")
+    def set_sqlite_pragma(dbapi_connection, connection_record):
+        try:
+            cursor = dbapi_connection.cursor()
+            # WAL mode para melhor concorrência
+            cursor.execute("PRAGMA journal_mode=WAL")
+            # Timeout para operações bloqueadas - crítico para concorrência
+            cursor.execute("PRAGMA busy_timeout=5000")
+            # Cache de páginas em memória
+            cursor.execute("PRAGMA cache_size=10000")
+            # Armazenar arquivos temporários em memória
+            cursor.execute("PRAGMA temp_store=memory")
+            # Memory-mapped I/O para arquivos grandes
+            cursor.execute("PRAGMA mmap_size=268435456")  # 256MB
+            # Sincronização normal (balanço performance/segurança)
+            cursor.execute("PRAGMA synchronous=NORMAL")
+            cursor.close()
+            print("✅ PRAGMAs SQLite aplicados via SQLAlchemy")
+        except Exception as e:
+            print(f"⚠️ Erro ao configurar PRAGMAs SQLite: {e}")
+
 def initialize_system():
     """Initialize database tables, default data, and migrate existing data"""
     with app.app_context():
+        # Configure SQLite PRAGMAs first
+        configure_sqlite_pragmas()
         # First create basic tables
         db.create_all()
         # Then ensure columns exist with migration
@@ -654,10 +732,18 @@ def index():
         session.clear()
         return redirect(url_for("login"))
     
-    # Get sort parameter from URL (default: asc for ascending order)
-    sort_order = request.args.get('sort', 'asc')
+    # Paginação inteligente - Admin pode ver todos, mas de forma eficiente
+    page = request.args.get('page', 1, type=int)
+    per_page = int(request.args.get('per_page', 50))  # 50 por página é um bom equilíbrio
     
-    # Determine sort order (asc = crescente/oldest first, desc = decrescente/newest first)
+    # Permitir até 200 por página para admins que querem ver mais
+    if per_page > 200:
+        per_page = 200
+    
+    # Get sort parameter from URL (default: desc for newest first - mais útil)
+    sort_order = request.args.get('sort', 'desc')
+    
+    # Determine sort order (desc = mais recentes primeiro é melhor para admins)
     if sort_order == 'desc':
         order_by_clause = Chamado.criado_em.desc()
         next_sort = 'asc'
@@ -675,31 +761,65 @@ def index():
         joinedload(Chamado.fechado_por)
     )
     
+    # Aplicar filtros baseados no usuário
     if u.is_admin():
-        # Admin sees all tickets
-        chamados = base_query.order_by(order_by_clause).all()
+        # Admin sees all tickets - mas paginado para performance
+        query = base_query.order_by(order_by_clause)
     elif u.has_permission('view_all'):
         # Users with view_all permission (like semigerente) see all tickets
-        chamados = base_query.order_by(order_by_clause).all()
+        query = base_query.order_by(order_by_clause)
     elif u.is_operator_like():
         # Operators and operator-like roles see tickets from their assigned sectors only
         user_sector_names = u.get_sector_names()
         if user_sector_names:
-            chamados = base_query.filter(Chamado.setor.in_(user_sector_names)).order_by(order_by_clause).all()
+            query = base_query.filter(Chamado.setor.in_(user_sector_names)).order_by(order_by_clause)
         else:
-            chamados = []  # No sectors assigned, no tickets visible
+            query = base_query.filter(Chamado.id == -1)  # Query that returns no results
     else:
         # Regular users see only their own tickets
-        chamados = base_query.filter_by(usuario_id=u.id).order_by(order_by_clause).all()
+        query = base_query.filter_by(usuario_id=u.id).order_by(order_by_clause)
+    
+    # Executar paginação
+    pagination = query.paginate(
+        page=page, 
+        per_page=per_page, 
+        error_out=False,
+        max_per_page=200
+    )
+    
+    chamados = pagination.items
+    
+    # Estatísticas rápidas para o dashboard (só para admin)
+    stats = None
+    if u.is_admin() or u.has_permission('view_all'):
+        try:
+            # Usar índices criados para consultas rápidas
+            total = Chamado.query.count()
+            abertos = Chamado.query.filter_by(status='Aberto').count()
+            fechados = Chamado.query.filter_by(status='Fechado').count()
+            em_andamento = Chamado.query.filter_by(status='Em Andamento').count()
+            
+            stats = {
+                'total': total,
+                'abertos': abertos,
+                'fechados': fechados,
+                'em_andamento': em_andamento
+            }
+        except Exception as e:
+            print(f"Erro ao calcular estatísticas: {e}")
+            stats = None
     
     return render_template("index.html", 
                          app_name=APP_NAME, 
                          user=u, 
                          chamados=chamados,
+                         pagination=pagination,
+                         stats=stats,
                          sort_order=sort_order,
                          next_sort=next_sort,
                          sort_label=sort_label,
-                         sort_icon=sort_icon)
+                         sort_icon=sort_icon,
+                         per_page=per_page)
 
 # -------------------- USUÁRIOS (ADMIN) --------------------
 @app.route("/usuarios")
